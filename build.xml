@@ -1,0 +1,26 @@
+<project default="compile">
+
+  <property environment="env"/> <!-- load the environment variables -->
+
+  <target name="compile" description="compile my code">
+    <mkdir dir="TankCommand/bin"/>
+    <javac srcdir="TankCommand/src" destdir="TankCommand/bin" debug="true" debuglevel="lines,source" includeantruntime="false">
+	<classpath>
+		<pathelement location="TankCommand/bin"/>
+		<pathelement location="lib/junit-4.12.jar"/>
+	</classpath>
+    </javac>
+    <copy todir="TankCommand/bin/TC/resources" overwrite="true">
+      <fileset dir="TankCommand/src/TC/resources"/>
+    </copy>
+  </target>
+
+  <target name="run" depends="compile" description="run TankCommand">
+    <java fork="true" classname="TC.Window" classpath="TankCommand/bin" />
+  </target>
+
+  <target name="clean" description="delete unnecessary files and directories">
+    <delete dir="TankCommand/bin" quiet="true" />
+  </target>
+
+</project>
